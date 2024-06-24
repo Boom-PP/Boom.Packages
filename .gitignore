@@ -1,0 +1,62 @@
+# .gitignore for JetBrains Rider and C# projects
+
+# User-specific files
+*.rsuser
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
+# Others
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# Including a folder path will ignore all files within that folder
+/test-results/
+
+# Exclude node_modules folder, commonly found in Javascript projects
+**/node_modules/
+
+# Exclude the bower_components folder, commonly found in Javascript projects
+**/bower_components/
+
+# Image files that might be uploaded to the repository
+# Ignore all jpeg, jpg, png, gif
+*.jpg
+*.png
+*.gif
+*.jpeg
+
+# Ignore SQLite database files
+*.sqlite
+
+# Ignore all files that start with .local
+.local*
+
+# JetBrains Rider files
+.idea/
+*.idea.*

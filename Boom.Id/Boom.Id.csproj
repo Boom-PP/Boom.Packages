@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFramework>net8.0</TargetFramework>
+        <Authors>Morten Petterøe</Authors>
+        <Company>Boom AS</Company>
+        <PackageId>Boom.Id</PackageId>
+        <Product>Boom.Id</Product>
+        <Copyright>Copyright © 2024 - 2024 Boom AS</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/boom-pp/boom.id</PackageProjectUrl>
+        <PackageTags>boom id identifier</PackageTags>
+        <PackageReleaseNotes>Initial package</PackageReleaseNotes>
+        <Description>An ID type based on IdGen for use in Boom projects</Description>
+        <LangVersion>latest</LangVersion>
+        <RootNamespace>Boom.Id</RootNamespace>
+        <PackageIcon>boom_logo.png</PackageIcon>
+        <PackageIconUrl />
+        <RepositoryUrl>https://github.com/boom-pp/boom.id</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <Configurations>Debug;Release</Configurations>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="IdGen" Version="3.0.7" />
+    </ItemGroup>
+
+</Project>
