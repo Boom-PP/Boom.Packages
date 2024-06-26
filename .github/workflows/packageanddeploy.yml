@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build ./Boom.Id --no-restore
+        run: dotnet build ./Boom.Id -c Release --no-restore
 
       - name: Test
         run: dotnet test ./Boom.Id.UnitTests --no-build
