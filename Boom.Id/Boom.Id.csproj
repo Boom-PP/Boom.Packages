@@ -29,4 +29,8 @@
       <PackageReference Include="IdGen" Version="3.0.7" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="boom_logo.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
 </Project>

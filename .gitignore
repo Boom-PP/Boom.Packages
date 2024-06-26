@@ -34,6 +34,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
+*.nupkg
 
 # Including a folder path will ignore all files within that folder
 /test-results/
