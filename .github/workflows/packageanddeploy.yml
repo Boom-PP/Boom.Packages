@@ -28,19 +28,22 @@ jobs:
         run: dotnet test ./Boom.IdType.UnitTests/Boom.IdType.UnitTests.csproj -c Release --no-restore
 
       - name: Package
-        run: dotnet pack ./Boom.IdType/Boom.IdType.csproj -c Release --no-restore -o out
+        run: dotnet pack ./Boom.IdType/Boom.IdType.csproj -c Release --no-restore -o out -p:PackageVersion=${{github.ref_name}}
+        
+      - name: Push to Nuget
+        run: dotnet nuget push ./out/Boom.IdType.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
-      # Publish
-      - name: Publish to Nuget
-        id: publish_nuget
-        uses: tedd/publish-nuget-neo@v1
-        with:
-          PROJECT_FILE_PATH: ./Boom.IdType/Boom.IdType.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          TAG_COMMIT: false
-          TAG_FORMAT: "*"
-          REBUILD_PROJECT: false
-          VERSION_STATIC: ${{github.ref_name}}
+#      # Publish
+#      - name: Publish to Nuget
+#        id: publish_nuget
+#        uses: tedd/publish-nuget-neo@v1
+#        with:
+#          PROJECT_FILE_PATH: ./Boom.IdType/Boom.IdType.csproj
+#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+#          TAG_COMMIT: false
+#          TAG_FORMAT: "*"
+#          REBUILD_PROJECT: false
+#          VERSION_STATIC: ${{github.ref_name}}
           
 #  id-entityframework:
 #
