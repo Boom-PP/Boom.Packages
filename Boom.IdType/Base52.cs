@@ -1,4 +1,4 @@
-﻿namespace Boom.Id;
+﻿namespace Boom.IdType;
 
 internal static class Base52
 {

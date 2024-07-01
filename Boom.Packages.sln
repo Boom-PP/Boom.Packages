@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boom.Id", "Boom.Id\Boom.Id.csproj", "{056831FF-A6B4-4A91-B97F-2D32B5938B9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boom.IdType", "Boom.IdType\Boom.IdType.csproj", "{056831FF-A6B4-4A91-B97F-2D32B5938B9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boom.Id.UnitTests", "Boom.Id.UnitTests\Boom.Id.UnitTests.csproj", "{7517B8B4-41ED-4255-87F7-0B1526DEDED1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boom.IdType.UnitTests", "Boom.IdType.UnitTests\Boom.IdType.UnitTests.csproj", "{7517B8B4-41ED-4255-87F7-0B1526DEDED1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boom.IdType.EntityFramework", "Boom.IdType.EntityFramework\Boom.IdType.EntityFramework.csproj", "{08569472-D945-4FEB-8B80-70521F369491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{7517B8B4-41ED-4255-87F7-0B1526DEDED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7517B8B4-41ED-4255-87F7-0B1526DEDED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7517B8B4-41ED-4255-87F7-0B1526DEDED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08569472-D945-4FEB-8B80-70521F369491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08569472-D945-4FEB-8B80-70521F369491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08569472-D945-4FEB-8B80-70521F369491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08569472-D945-4FEB-8B80-70521F369491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

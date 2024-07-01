@@ -1,4 +1,4 @@
-namespace Boom.Id.UnitTests;
+namespace Boom.IdType.UnitTests;
 
 public class IdTests
 {

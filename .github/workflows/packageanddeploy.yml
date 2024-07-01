@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  packageanddeploy:
+  id:
     
     runs-on: ubuntu-latest
 
@@ -22,19 +22,54 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build ./Boom.IdType/Boom.IdType.csproj -c Release --no-restore
 
       - name: Test
-        run: dotnet test -c
+        run: dotnet test ./Boom.IdType.UnitTests/Boom.IdType.UnitTests.csproj -c Release --no-restore
 
       - name: Package
-        run: dotnet pack --no-build -c Release -o out
+        run: dotnet pack ./Boom.IdType/Boom.IdType.csproj -c Release --no-restore -o out
 
       # Publish
-      - name: publish on version change
+      - name: Publish to Nuget
         id: publish_nuget
         uses: tedd/publish-nuget-neo@v1
         with:
+          PROJECT_FILE_PATH: ./Boom.IdType/Boom.IdType.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           TAG_COMMIT: true
           REBUILD_PROJECT: false
+          
+#  id-entityframework:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Setup .NET
+#        uses: actions/setup-dotnet@v4
+#        with:
+#          dotnet-version: 8.x
+#
+#      - name: Restore dependencies
+#        run: dotnet restore
+#
+#      - name: Build
+#        run: dotnet build ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore
+#
+#      #- name: Test
+#      #  run: dotnet test ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.UnitTests.csproj -c Release --no-restore
+#
+#      - name: Package
+#        run: dotnet pack ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore -o out
+#
+#      # Publish
+#      - name: Publish to Nuget
+#        id: publish_nuget
+#        uses: tedd/publish-nuget-neo@v1
+#        with:
+#          PROJECT_FILE_PATH: ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj
+#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+#          TAG_COMMIT: true
+#          REBUILD_PROJECT: false
