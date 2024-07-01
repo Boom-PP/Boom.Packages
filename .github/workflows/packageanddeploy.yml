@@ -39,6 +39,7 @@ jobs:
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           TAG_COMMIT: true
           REBUILD_PROJECT: false
+          VERSION_STATIC: ${{github.ref_name}}
           
 #  id-entityframework:
 #
