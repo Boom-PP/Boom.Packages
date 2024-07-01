@@ -38,7 +38,7 @@ jobs:
           PROJECT_FILE_PATH: ./Boom.IdType/Boom.IdType.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           TAG_COMMIT: false
-          TAG_FORMAT: *
+          TAG_FORMAT: "*"
           REBUILD_PROJECT: false
           VERSION_STATIC: ${{github.ref_name}}
           
