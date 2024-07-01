@@ -10,14 +10,13 @@
         <Product>Boom.Id</Product>
         <Copyright>Copyright © 2024 - 2024 Boom AS</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/boom-pp/boom.id</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/boom-pp/boom.packages</PackageProjectUrl>
         <PackageTags>boom id identifier</PackageTags>
         <PackageReleaseNotes>Initial package</PackageReleaseNotes>
         <Description>An ID type based on IdGen for use in Boom projects</Description>
         <LangVersion>latest</LangVersion>
         <PackageIcon>boom_logo.png</PackageIcon>
-        <PackageIconUrl />
-        <RepositoryUrl>https://github.com/boom-pp/boom.id</RepositoryUrl>
+        <RepositoryUrl>https://github.com/boom-pp/boom.packages</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <AnalysisLevel>latest</AnalysisLevel>
