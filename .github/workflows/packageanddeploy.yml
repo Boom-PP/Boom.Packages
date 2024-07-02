@@ -31,7 +31,7 @@ jobs:
         run: dotnet pack ./Boom.IdType/Boom.IdType.csproj -c Release --no-restore -o out -p:PackageVersion=${{github.ref_name}}
         
       - name: Push to Nuget
-        run: dotnet nuget push ./out/Boom.IdType.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ./out/BoomPP.IdType.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
 #      # Publish
 #      - name: Publish to Nuget
