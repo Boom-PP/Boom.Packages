@@ -34,7 +34,8 @@ jobs:
         run: dotnet nuget push ./out/BoomPP.IdType.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
           
   id-entityframework:
-
+    needs: id
+    
     runs-on: ubuntu-latest
 
     steps:
