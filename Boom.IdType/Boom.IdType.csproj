@@ -6,7 +6,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Authors>Morten Petterøe</Authors>
         <Company>Boom AS</Company>
-        <PackageId>Boom.IdType</PackageId>
+        <PackageId>BoomPP.IdType</PackageId>
         <Product>Boom.Id</Product>
         <Copyright>Copyright © 2024 - 2024 Boom AS</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
