@@ -1,17 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TargetFramework>net8.0</TargetFramework>
+        <Authors>Morten Petterøe</Authors>
+        <Company>Boom AS</Company>
+        <PackageId>BoomPP.IdType.EntityFramework</PackageId>
+        <Product>Boom.Id</Product>
+        <Copyright>Copyright © 2024 - 2024 Boom AS</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/boom-pp/boom.packages</PackageProjectUrl>
+        <PackageTags>boom id identifier</PackageTags>
+        <PackageReleaseNotes>Initial package</PackageReleaseNotes>
+        <Description>Entity Framework Core helpers for the Boom Id type</Description>
+        <LangVersion>latest</LangVersion>
+        <PackageIcon>boom_logo.png</PackageIcon>
+        <RepositoryUrl>https://github.com/boom-pp/boom.packages</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="BoomPP.IdType" Version="1.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Boom.IdType\Boom.IdType.csproj" />
-    </ItemGroup>
-
+    
 </Project>

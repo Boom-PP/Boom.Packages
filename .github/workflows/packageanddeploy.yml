@@ -32,49 +32,33 @@ jobs:
         
       - name: Push to Nuget
         run: dotnet nuget push ./out/BoomPP.IdType.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
-
-#      # Publish
-#      - name: Publish to Nuget
-#        id: publish_nuget
-#        uses: tedd/publish-nuget-neo@v1
-#        with:
-#          PROJECT_FILE_PATH: ./Boom.IdType/Boom.IdType.csproj
-#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-#          TAG_COMMIT: false
-#          TAG_FORMAT: "*"
-#          REBUILD_PROJECT: false
-#          VERSION_STATIC: ${{github.ref_name}}
           
-#  id-entityframework:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup .NET
-#        uses: actions/setup-dotnet@v4
-#        with:
-#          dotnet-version: 8.x
-#
-#      - name: Restore dependencies
-#        run: dotnet restore
-#
-#      - name: Build
-#        run: dotnet build ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore
-#
-#      #- name: Test
-#      #  run: dotnet test ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.UnitTests.csproj -c Release --no-restore
-#
-#      - name: Package
-#        run: dotnet pack ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore -o out
-#
-#      # Publish
-#      - name: Publish to Nuget
-#        id: publish_nuget
-#        uses: tedd/publish-nuget-neo@v1
-#        with:
-#          PROJECT_FILE_PATH: ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj
-#          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-#          TAG_COMMIT: true
-#          REBUILD_PROJECT: false
+  id-entityframework:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Update ID package
+        run: dotnet add ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj package BoomPP.IdType -v ${{github.ref_name}} --no-restore
+        
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore
+
+      #- name: Test
+      #  run: dotnet test ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.UnitTests.csproj -c Release --no-restore
+
+      - name: Package
+        run: dotnet pack ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj -c Release --no-restore -o out -p:PackageVersion=${{github.ref_name}}
+
+      - name: Push to Nuget
+        run: dotnet nuget push ./out/BoomPP.IdType.EntityFramework.${{github.ref_name}}.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
