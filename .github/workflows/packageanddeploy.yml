@@ -46,8 +46,9 @@ jobs:
         with:
           dotnet-version: 8.x
 
-      - name: Update ID package
-        run: dotnet add ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj package BoomPP.IdType -v ${{github.ref_name}} --no-restore
+#      Need to skip this step until I figure out how to pick the package published in the previous job
+#      - name: Update ID package
+#        run: dotnet add ./Boom.IdType.EntityFramework/Boom.IdType.EntityFramework.csproj package BoomPP.IdType -v ${{github.ref_name}} --no-restore
         
       - name: Restore dependencies
         run: dotnet restore
