@@ -22,4 +22,14 @@ public class IdTests(ITestOutputHelper testOutputHelper)
         stringId.Should().BeOfType<string>(stringId);
         stringId.Should().Be(id.ToString());
     }
+
+    [Fact]
+    public void IdShouldBeAwesomelyFormatted()
+    {
+        var id = Id.FromExisting("8jywwL8S1hh");
+
+        string formatted = id;
+
+        formatted.Should().Be("8jyw-wL8S-1hh");
+    }
 }

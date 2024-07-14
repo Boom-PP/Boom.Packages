@@ -1,11 +1,15 @@
 ﻿namespace Boom.IdType;
 
-internal static class Base52
-{
-    private const int BASE = 52; // Matches the number of characters in the allowed characters array below
-    private static readonly char[] BaseChars = "0123456789BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz".ToCharArray();
 
-    public static string ToBase52(this long input)
+/// <summary>
+/// Base 31 is used in order to make the IDs case ignorant
+/// </summary>
+internal static class Base31
+{
+    private const int BASE = 31; // Matches the number of characters in the allowed characters array below
+    private static readonly char[] BaseChars = "0123456789bcdfghjklmnpqrstvwxyz".ToCharArray();
+
+    public static string ToBase31(this long input)
     {
         if (input < 0) throw new ArgumentOutOfRangeException(nameof(input), input, "input cannot be negative");
 

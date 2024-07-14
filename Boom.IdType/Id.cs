@@ -17,8 +17,16 @@ public sealed record Id
         }
     }
 
-    internal Id(string value) => _value = value;
-    
+    internal Id(string value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+
+        if (value.Length < 9)
+            throw new ArgumentException("An Id must be at least 9 characters", nameof(value));
+        
+        _value = value;
+    }
+
     public bool IsEmpty => string.IsNullOrWhiteSpace(_value);
     
     public static Id Empty => new(string.Empty);
@@ -35,8 +43,13 @@ public sealed record Id
     // public static implicit operator Id(string value) => new(value);
     public bool Equals(Id? other) => _value == other?._value;
     public override int GetHashCode() => _value?.GetHashCode() ?? 0;
-    public override string ToString() => _value ?? string.Empty;
+    public override string ToString() => AwesomeIdFormat(_value) ?? string.Empty;
     
-    public static Id NewId() => new(IdGenerator.CreateId().ToBase52());
+    public static Id NewId() => new(IdGenerator.CreateId().ToBase31());
+
+    private static string? AwesomeIdFormat(string? raw)
+    {
+        return raw is null ? null : $"{raw[..4]}-{raw[4..8]}-{raw[8..]}";
+    }
 }
 
