@@ -24,7 +24,7 @@ public sealed record Id
         if (value.Length < 9)
             throw new ArgumentException("An Id must be at least 9 characters", nameof(value));
         
-        _value = value;
+        _value = value.Replace("-", "");
     }
 
     public bool IsEmpty => string.IsNullOrWhiteSpace(_value);
