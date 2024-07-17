@@ -1,7 +1,10 @@
-﻿using IdGen;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using IdGen;
 
 namespace Boom.IdType;
 
+[JsonConverter(typeof(IdJsonConverter))]
 public sealed record Id
 {
     private readonly string? _value;
@@ -16,7 +19,7 @@ public sealed record Id
             return IdGeneratorInstance;
         }
     }
-
+    
     internal Id(string value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
@@ -53,3 +56,11 @@ public sealed record Id
     }
 }
 
+public class IdJsonConverter : JsonConverter<Id>
+{
+    public override Id? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        => Id.FromExisting(reader.GetString()!);
+
+    public override void Write(Utf8JsonWriter writer, Id value, JsonSerializerOptions options)
+        => writer.WriteStringValue(value.ToString());
+}

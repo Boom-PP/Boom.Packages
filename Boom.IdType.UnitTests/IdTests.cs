@@ -1,3 +1,4 @@
+using System.Text.Json;
 using FluentAssertions;
 using Xunit.Abstractions;
 
@@ -41,5 +42,27 @@ public class IdTests(ITestOutputHelper testOutputHelper)
         string formatted = id;
 
         formatted.Should().Be("8jyw-wL8S-1hh");
+    }
+
+    [Fact]
+    public void ShouldHandleJsonSerialization()
+    {
+        var id = Id.FromExisting("8jyw-wL8S-1hh");
+
+        var serialized = JsonSerializer.Serialize(id);
+
+        serialized.Should().Be("\"8jyw-wL8S-1hh\"");
+    }
+
+    [Fact]
+    public void ShouldHandleJsonDeserialization()
+    {
+        var serialized = "\"8jyw-wL8S-1hh\"";
+
+        var deserialized = JsonSerializer.Deserialize<Id>(serialized);
+
+        deserialized.Should().NotBeNull();
+        deserialized.Should().BeOfType<Id>();
+        deserialized!.ToString().Should().Be("8jyw-wL8S-1hh");
     }
 }
