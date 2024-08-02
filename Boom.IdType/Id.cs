@@ -56,7 +56,7 @@ public sealed record Id
 
     private static string? AwesomeIdFormat(string? raw)
     {
-        return raw is null ? null : $"{raw[..4]}-{raw[4..8]}-{raw[8..]}";
+        return string.IsNullOrWhiteSpace(raw) ? null : $"{raw[..4]}-{raw[4..8]}-{raw[8..]}";
     }
 }
 

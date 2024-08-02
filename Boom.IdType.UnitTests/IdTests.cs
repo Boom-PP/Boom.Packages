@@ -81,4 +81,12 @@ public class IdTests(ITestOutputHelper testOutputHelper)
         
         act.Should().Throw<ArgumentException>().WithMessage("Id must have a value");
     }
+
+    [Fact]
+    public void ShouldNotDieOnToStringOnEmptyId()
+    {
+        var id = Id.Empty;
+
+        id.ToString().Should().BeEmpty();
+    }
 }
