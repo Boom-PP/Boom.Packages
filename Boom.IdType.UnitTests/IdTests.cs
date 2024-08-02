@@ -65,4 +65,20 @@ public class IdTests(ITestOutputHelper testOutputHelper)
         deserialized.Should().BeOfType<Id>();
         deserialized!.ToString().Should().Be("8jyw-wL8S-1hh");
     }
+
+    [Fact]
+    public void ShouldSupportCreatingEmpty()
+    {
+        var emptyId = Id.Empty;
+        
+        emptyId.IsEmpty.Should().BeTrue();
+    }
+
+    [Fact]
+    public void NoExternalShouldBeAllowedToInstantiateEmptyId()
+    {
+        var act = () => new Id(string.Empty);
+        
+        act.Should().Throw<ArgumentException>().WithMessage("Id must have a value");
+    }
 }

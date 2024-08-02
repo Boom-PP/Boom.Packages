@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using IdGen;
 
@@ -7,10 +8,11 @@ namespace Boom.IdType;
 [JsonConverter(typeof(IdJsonConverter))]
 public sealed record Id
 {
-    private readonly string? _value;
-    internal static IdGenerator? IdGeneratorInstance;
-    
-    private static IdGenerator IdGenerator {
+    private readonly string?      _value;
+    internal static  IdGenerator? IdGeneratorInstance;
+
+    private static IdGenerator IdGenerator
+    {
         get
         {
             if (IdGeneratorInstance is null)
@@ -19,19 +21,20 @@ public sealed record Id
             return IdGeneratorInstance;
         }
     }
-    
-    internal Id(string value)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        if (value.Length < 9)
+    internal Id(string value, [CallerMemberName] string? caller = null)
+    {
+        if (string.IsNullOrWhiteSpace(value) && caller != "Empty")
+            throw new ArgumentException("Id must have a value");
+
+        if (value.Length < 9 && caller != "Empty")
             throw new ArgumentException("An Id must be at least 9 characters", nameof(value));
-        
+
         _value = value.Replace("-", "");
     }
 
     public bool IsEmpty => string.IsNullOrWhiteSpace(_value);
-    
+
     public static Id Empty => new(string.Empty);
 
     /// <summary>
@@ -43,11 +46,12 @@ public sealed record Id
     public static Id FromExisting(string existingId) => new(existingId);
 
     public static implicit operator string(Id id) => id.ToString();
+
     // public static implicit operator Id(string value) => new(value);
-    public bool Equals(Id? other) => _value == other?._value;
-    public override int GetHashCode() => _value?.GetHashCode() ?? 0;
-    public override string ToString() => AwesomeIdFormat(_value) ?? string.Empty;
-    
+    public          bool   Equals(Id? other) => _value == other?._value;
+    public override int    GetHashCode()     => _value?.GetHashCode() ?? 0;
+    public override string ToString()        => AwesomeIdFormat(_value) ?? string.Empty;
+
     public static Id NewId() => new(IdGenerator.CreateId().ToBase31());
 
     private static string? AwesomeIdFormat(string? raw)
