@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="BoomPP.IdType" Version="1.0.2" />
+      <PackageReference Include="BoomPP.IdType" Version="1.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     </ItemGroup>
 

@@ -9,5 +9,5 @@ namespace Boom.IdType.EntityFramework;
 public class IdConverter() : ValueConverter<Id, string>
 (
     id => id.ToString(),
-    value => new(value)
+    value => Id.FromExisting(value)
 );
