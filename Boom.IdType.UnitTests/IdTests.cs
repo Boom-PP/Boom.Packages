@@ -23,6 +23,17 @@ public class IdTests(ITestOutputHelper testOutputHelper)
         stringId.Should().BeOfType<string>(stringId);
         stringId.Should().Be(id.ToString());
     }
+    
+    [Fact]
+    public void CanImplicitlyConvertNullToString()
+    {
+        Id? id = null;
+
+        string stringId = id;
+
+        stringId.Should().BeOfType<string>(stringId);
+        stringId.Should().Be(string.Empty);
+    }
 
     [Fact]
     public void IdShouldBeAwesomelyFormatted()

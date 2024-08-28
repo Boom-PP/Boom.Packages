@@ -45,7 +45,7 @@ public sealed record Id
     /// <remarks>NOTE: The existing value is not validated. Use carefully.</remarks>
     public static Id FromExisting(string existingId) => new(existingId);
 
-    public static implicit operator string(Id id) => id.ToString();
+    public static implicit operator string(Id? id) => id is null ? string.Empty : id.ToString();
 
     // public static implicit operator Id(string value) => new(value);
     public          bool   Equals(Id? other) => _value == other?._value;

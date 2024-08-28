@@ -11,3 +11,17 @@ public class IdConverter() : ValueConverter<Id, string>
     id => id.ToString(),
     value => Id.FromExisting(value)
 );
+
+file static class IdConverterHelper
+{
+    public static string? ToDbValue(Id? id) => id is null || id == Id.Empty ? null : id.ToString();
+    public static Id? FromDbValue(string dbValue)
+    {
+        if (string.IsNullOrWhiteSpace(dbValue)) return null;
+        
+        var id = Id.FromExisting(dbValue);
+        if (id == null || id == Id.Empty) return null;
+
+        return id;
+    }
+}
