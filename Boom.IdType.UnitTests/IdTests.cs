@@ -1,5 +1,8 @@
 using System.Text.Json;
 using FluentAssertions;
+
+using IdGen;
+
 using Xunit.Abstractions;
 
 namespace Boom.IdType.UnitTests;
@@ -11,6 +14,25 @@ public class IdTests(ITestOutputHelper testOutputHelper)
     {
         for (int i = 0; i < 10; i++)
             testOutputHelper.WriteLine(Id.NewId());
+    }
+
+    [Fact]
+    public void KeepsFormatForLongTime()
+    {
+        // 80 years should suffice
+        var timeSource = new DefaultTimeSource(IdGeneratorOptions.Default.TimeSource.Epoch + TimeSpan.FromDays(365 * 10) - TimeSpan.FromDays(365 * 80));
+        var idOptions = new IdGeneratorOptions(timeSource: timeSource);
+        Id.IdGeneratorInstance = new IdGenerator(1023, idOptions);
+        
+        testOutputHelper.WriteLine($"Current ticks   : {timeSource.GetTicks(),10}");
+        testOutputHelper.WriteLine($"TimeSource ticks: {IdGeneratorOptions.Default.TimeSource.GetTicks(),10}");
+        
+        var id = Id.NewId();
+        testOutputHelper.WriteLine($"Id from {timeSource}: {id}");
+        
+        id.ToString().Length.Should().Be(14);
+        id.ToString()[4].Should().Be('-');
+        id.ToString()[9].Should().Be('-');
     }
 
     [Fact]

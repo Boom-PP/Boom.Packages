@@ -1,13 +1,33 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using IdGen;
+
 
 namespace Boom.IdType;
 
+/// <summary>
+/// Represents an identifier based on the IdGen library. Ids are time-ordered
+/// and are suitable for use as a database key. They are also case-insensitive, and formatted to minimize
+/// confusion between different characters and digits in case it has to be read by humans.<br />
+/// Usages:
+/// <code>var varId = Id.NewId();</code>
+/// <code>Id id = Id.NewId();</code>
+/// <code>string stringId = Id.NewId();</code>
+/// <code>string stringId = id;</code>
+/// <code>Id id = stringId; // Will fail. No implicit operator from string to Id</code>
+/// </summary>
+/// <remarks>
+/// The epoch for this ID generator is Aug 30, 2024. It will keep to the default formatting of xxxx-xxxx-xxxx
+/// for the next 80 years or so, when it will overflow with an extra character in the last group.
+/// Consider refactoring this package around the summer of 2104.
+/// </remarks>
 [JsonConverter(typeof(IdJsonConverter))]
 public sealed record Id
 {
+    private static readonly DateTime DefaultEpoch = new(2024, 8, 30, 0, 0, 0, DateTimeKind.Utc);
+
     private readonly string?      _value;
     internal static  IdGenerator? IdGeneratorInstance;
 
@@ -52,13 +72,14 @@ public sealed record Id
     public override int    GetHashCode()     => _value?.GetHashCode() ?? 0;
     public override string ToString()        => AwesomeIdFormat(_value) ?? string.Empty;
 
-    public static Id NewId() => new(IdGenerator.CreateId().ToBase31());
+    public static Id NewId() => new(IdGenerator.CreateId().ToBase());
 
     private static string? AwesomeIdFormat(string? raw)
     {
         return string.IsNullOrWhiteSpace(raw) ? null : $"{raw[..4]}-{raw[4..8]}-{raw[8..]}";
     }
 }
+
 
 public class IdJsonConverter : JsonConverter<Id>
 {

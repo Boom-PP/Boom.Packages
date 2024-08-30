@@ -4,12 +4,12 @@
 /// <summary>
 /// Base 31 is used in order to make the IDs case ignorant
 /// </summary>
-internal static class Base31
+internal static class BaseConverter
 {
-    private const int BASE = 31; // Matches the number of characters in the allowed characters array below
-    private static readonly char[] BaseChars = "0123456789bcdfghjklmnpqrstvwxyz".ToCharArray();
+    private static readonly char[] BaseChars = "0123456789abcdefghjklmnpqrstvwxyz".ToCharArray();
+    private static readonly int Base = BaseChars.Length; // Matches the number of characters in the allowed characters array below
 
-    public static string ToBase31(this long input)
+    public static string ToBase(this long input)
     {
         if (input < 0) throw new ArgumentOutOfRangeException(nameof(input), input, "input cannot be negative");
 
@@ -18,8 +18,8 @@ internal static class Base31
         var stack = new Stack<char>();
         while (input != 0)
         {
-            stack.Push(BaseChars[input % BASE]);
-            input /= BASE;
+            stack.Push(BaseChars[input % Base]);
+            input /= Base;
         }
 
         return new string(stack.ToArray());
