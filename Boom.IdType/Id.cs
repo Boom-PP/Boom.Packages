@@ -65,6 +65,23 @@ public sealed record Id
     /// <remarks>NOTE: The existing value is not validated. Use carefully.</remarks>
     public static Id FromExisting(string existingId) => new(existingId);
 
+    /// <summary>
+    /// Will create an ID from a string if the input string is valid
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="id"></param>
+    /// <returns>True if the value was successfully parsed</returns>
+    /// <remarks>Was mainly added to support FastEndpoints request binding: https://fast-endpoints.com/docs/model-binding#supported-dto-property-types</remarks>
+    public static bool TryParse(string? value, out Id? id)
+    {
+        id = null;
+        if (value is null)
+            return false;
+
+        id = FromExisting(value);
+        return true;
+    }
+
     public static implicit operator string(Id? id) => id is null ? string.Empty : id.ToString();
 
     // public static implicit operator Id(string value) => new(value);
