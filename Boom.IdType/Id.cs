@@ -4,6 +4,8 @@ using System.Text.Json.Serialization;
 
 using IdGen;
 
+using NJsonSchema.Annotations;
+
 
 namespace Boom.IdType;
 
@@ -24,6 +26,7 @@ namespace Boom.IdType;
 /// Consider refactoring this package around the summer of 2104.
 /// </remarks>
 [JsonConverter(typeof(IdJsonConverter))]
+[JsonSchemaType(typeof(string))] // Temp workaround to support Cratis Chronicle. Will be removed later.
 public sealed record Id
 {
     private static readonly DateTime DefaultEpoch = new(2024, 8, 30, 0, 0, 0, DateTimeKind.Utc);

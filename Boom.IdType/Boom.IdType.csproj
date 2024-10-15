@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <PackageReference Include="IdGen" Version="3.0.7" />
+      <PackageReference Include="NJsonSchema" Version="11.0.2" />
     </ItemGroup>
 
     <ItemGroup>
