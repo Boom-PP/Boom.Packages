@@ -20,8 +20,6 @@ file static class IdConverterHelper
         if (string.IsNullOrWhiteSpace(dbValue)) return null;
         
         var id = Id.FromExisting(dbValue);
-        if (id == null || id == Id.Empty) return null;
-
-        return id;
+        return id == Id.Empty ? null : id;
     }
 }

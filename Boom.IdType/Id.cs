@@ -19,6 +19,7 @@ namespace Boom.IdType;
 /// <code>string stringId = Id.NewId();</code>
 /// <code>string stringId = id;</code>
 /// <code>Id id = stringId; // Will fail. No implicit operator from string to Id</code>
+/// <code>Id id = Id.FromExisting(stringId);</code>
 /// </summary>
 /// <remarks>
 /// The epoch for this ID generator is Aug 30, 2024. It will keep to the default formatting of xxxx-xxxx-xxxx
@@ -27,7 +28,7 @@ namespace Boom.IdType;
 /// </remarks>
 [JsonConverter(typeof(IdJsonConverter))]
 [JsonSchemaType(typeof(string))] // Temp workaround to support Cratis Chronicle. Will be removed later.
-public sealed record Id
+public sealed record Id : IComparable<Id>
 {
     private static readonly DateTime DefaultEpoch = new(2024, 8, 30, 0, 0, 0, DateTimeKind.Utc);
 
@@ -97,6 +98,14 @@ public sealed record Id
     private static string? AwesomeIdFormat(string? raw)
     {
         return string.IsNullOrWhiteSpace(raw) ? null : $"{raw[..4]}-{raw[4..8]}-{raw[8..]}";
+    }
+
+    public int CompareTo(Id? other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        return other is null 
+                   ? 1 
+                   : string.Compare(_value, other._value, StringComparison.OrdinalIgnoreCase);
     }
 }
 
