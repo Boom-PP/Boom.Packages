@@ -122,4 +122,27 @@ public class IdTests(ITestOutputHelper testOutputHelper)
 
         id.ToString().Should().BeEmpty();
     }
+    
+    [Fact]
+    public void CanCompareIds()
+    {
+        var id1 = Id.NewId();
+        var id2 = Id.NewId();
+
+        (id1.CompareTo(id2) < 0).Should().BeTrue();
+        (id2.CompareTo(id1) > 0).Should().BeTrue();
+        (id1.CompareTo(id1) == 0).Should().BeTrue();
+    }
+    
+    [Fact]
+    public void CanCompareIdsWithOperators()
+    {
+        var id1 = Id.NewId();
+        var id2 = Id.NewId();
+
+        (id1 > id2).Should().BeFalse();
+        (id1 < id2).Should().BeTrue();
+        (id1 <= id2).Should().BeTrue();
+        (id1 >= id2).Should().BeFalse();
+    }
 }

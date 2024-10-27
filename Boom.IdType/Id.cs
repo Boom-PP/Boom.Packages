@@ -89,9 +89,9 @@ public sealed record Id : IComparable<Id>
     public static implicit operator string(Id? id) => id is null ? string.Empty : id.ToString();
 
     // public static implicit operator Id(string value) => new(value);
-    public          bool   Equals(Id? other) => _value == other?._value;
-    public override int    GetHashCode()     => _value?.GetHashCode() ?? 0;
-    public override string ToString()        => AwesomeIdFormat(_value) ?? string.Empty;
+    public bool Equals(Id? other) => _value == other?._value;
+    public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+    public override string ToString() => AwesomeIdFormat(_value) ?? string.Empty;
 
     public static Id NewId() => new(IdGenerator.CreateId().ToBase());
 
@@ -103,9 +103,38 @@ public sealed record Id : IComparable<Id>
     public int CompareTo(Id? other)
     {
         if (ReferenceEquals(this, other)) return 0;
-        return other is null 
-                   ? 1 
+        return other is null
+                   ? 1
                    : string.Compare(_value, other._value, StringComparison.OrdinalIgnoreCase);
+    }
+
+
+    public static bool operator <(Id? left, Id? right)
+    {
+        if (ReferenceEquals(left, right)) return false;
+        if (left is null) return right is not null;
+        return left.CompareTo(right) < 0;
+    }
+
+    public static bool operator >(Id? left, Id? right)
+    {
+        if (ReferenceEquals(left, right)) return false;
+        if (left is null) return false;
+        return left.CompareTo(right) > 0;
+    }
+
+    public static bool operator <=(Id? left, Id? right)
+    {
+        if (ReferenceEquals(left, right)) return true;
+        if (left is null) return true;
+        return left.CompareTo(right) <= 0;
+    }
+
+    public static bool operator >=(Id? left, Id? right)
+    {
+        if (ReferenceEquals(left, right)) return true;
+        if (left is null) return right is null;
+        return left.CompareTo(right) >= 0;
     }
 }
 
