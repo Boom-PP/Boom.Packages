@@ -28,7 +28,7 @@ namespace Boom.IdType;
 /// </remarks>
 [JsonConverter(typeof(IdJsonConverter))]
 [JsonSchemaType(typeof(string))] // Temp workaround to support Cratis Chronicle. Will be removed later.
-public sealed record Id : IComparable<Id>
+public sealed record Id : IComparable<Id>, IComparable
 {
     private static readonly DateTime DefaultEpoch = new(2024, 8, 30, 0, 0, 0, DateTimeKind.Utc);
 
@@ -92,6 +92,18 @@ public sealed record Id : IComparable<Id>
     public bool Equals(Id? other) => _value == other?._value;
     public override int GetHashCode() => _value?.GetHashCode() ?? 0;
     public override string ToString() => AwesomeIdFormat(_value) ?? string.Empty;
+
+    public int CompareTo(object? obj)
+    {
+        if (obj is null) return 1;
+        if (ReferenceEquals(this, obj)) return 0;
+        return obj switch
+               {
+                   Id otherId         => CompareTo(otherId),
+                   string otherString => string.Compare(_value, otherString, StringComparison.OrdinalIgnoreCase),
+                   _                  => throw new ArgumentException("Object is not an Id or a string")
+               };
+    }
 
     public static Id NewId() => new(IdGenerator.CreateId().ToBase());
 
